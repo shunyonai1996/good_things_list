@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <PostComponent msg="good things post"/>
-  </div>
+  <hello-world />
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import PostComponent from '@/components/PostComponent.vue';
+  import Vue from 'vue'
+  import HelloWorld from '../components/HelloWorld.vue'
 
-export default Vue.extend({
-  name: 'HomeView',
-  components: {
-    PostComponent
-},
-});
+  export default Vue.extend({
+    name: 'HomeView',
+
+    components: {
+      HelloWorld,
+    },
+  })
 </script>
