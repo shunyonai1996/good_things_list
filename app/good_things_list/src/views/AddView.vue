@@ -1,22 +1,26 @@
 <template>
-  <div>
-    <h2>新規ユーザー登録</h2>
-    <form @submit.prevent="registerUser">
-      <label for="name">名前</label>
-      <input type="text" v-model="name" required>
-      <br>
-      <label for="email">Eメール</label>
-      <input type="email" v-model="email" required>
-      <br>
-      <label for="password">パスワード</label>
-      <input type="password" v-model="password" required>
-      <br>
-      <label for="passwordConfirm">パスワード（確認）</label>
-      <input type="password" v-model="passwordConfirm" required>
-      <br>
-      <button type="submit">登録</button>
-    </form>
-  </div>
+  <v-app>
+    <v-card width="400px" class="mx-auto mt-5">
+      <v-card-title>
+        <h2>新規ユーザー登録</h2>
+      </v-card-title>
+
+      <v-card-text>
+        <v-form @submit.prevent="registerUser">
+          <v-text-field v-model="name" label="ユーザー名" required></v-text-field>
+          <v-text-field v-model="email" label="メールアドレス" required></v-text-field>
+          <v-text-field v-model="password" label="パスワード" type="password" required></v-text-field>
+          <span v-if="passwordsMatch" style="color: green;">パスワードが一致しています</span>
+          <span v-else style="color: red;">パスワードが一致していません</span>
+          <v-text-field v-model="passwordConfirm" label="パスワード（確認用）" type="password" required></v-text-field>
+          <v-card-actions>
+            <v-btn :disabled="!passwordsMatch" type="submit" color="primary">登録</v-btn>
+            <v-progress-circular v-if="loading" indeterminate color="primary"></v-progress-circular>
+          </v-card-actions>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-app>
 </template>
 
 <script lang="ts">
@@ -29,31 +33,34 @@ export default {
       name: '',
       email: '',
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      loading: false
     };
+  },
+  computed: {
+    passwordsMatch() {
+      return this.password === this.passwordConfirm;
+    }
   },
   methods: {
     async registerUser() {
-      if (this.password !== this.passwordConfirm) {
-        alert('パスワードが一致しません');
+      if (!this.passwordsMatch) {
+        // パスワードが一致しない場合の処理
         return;
       }
 
       try {
-        const userCredential = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
-        // ユーザーの名前を更新
-        const user = userCredential.user;
-        await user.updateProfile({
-          displayName: this.name
-        });
-        
-        alert('ユーザー登録が成功しました');
-        // 登録後の処理をここに追加
+        this.loading = true;
+        await firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+        // ユーザー登録成功時の処理
       } catch (error) {
-        alert('ユーザー登録に失敗しました');
-        console.error(error);
+        // エラーが発生した場合の処理
+        this.loading = true;
+      } finally {
+        this.loading = false;
       }
     }
   }
 };
 </script>
+
