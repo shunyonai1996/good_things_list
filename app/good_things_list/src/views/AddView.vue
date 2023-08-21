@@ -2,17 +2,15 @@
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
       <v-card-title>
-        <h2>新規ユーザー登録</h2>
+        <h1>新規登録</h1>
       </v-card-title>
 
       <v-card-text>
         <v-form @submit.prevent="registerUser">
-          <v-text-field v-model="name" label="ユーザー名" required></v-text-field>
-          <v-text-field v-model="email" label="メールアドレス" required></v-text-field>
-          <v-text-field v-model="password" label="パスワード" type="password" required></v-text-field>
-          <span v-if="passwordsMatch" style="color: green;">パスワードが一致しています</span>
-          <span v-else style="color: red;">パスワードが一致していません</span>
-          <v-text-field v-model="passwordConfirm" label="パスワード（確認用）" type="password" required></v-text-field>
+          <v-text-field v-model="name" prepend-icon="mdi-account" label="ユーザー名" required />
+          <v-text-field v-model="email" prepend-icon="mdi-email" label="メールアドレス" required />
+          <v-text-field v-model="password" v-bind:type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword" prepend-icon="mdi-lock" v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" label="パスワード" required />
+          <v-text-field v-model="passwordConfirm" v-bind:type="showPasswordConfirm ? 'text' : 'password'" @click:append="showPasswordConfirm = !showPasswordConfirm" prepend-icon="mdi-lock" v-bind:append-icon="showPasswordConfirm ? 'mdi-eye' : 'mdi-eye-off'" label="パスワード（確認用）" required />
           <v-card-actions>
             <v-btn :disabled="!passwordsMatch" type="submit" color="primary">登録</v-btn>
             <v-progress-circular v-if="loading" indeterminate color="primary"></v-progress-circular>
@@ -34,6 +32,8 @@ export default {
       email: '',
       password: '',
       passwordConfirm: '',
+      showPassword: false,
+      showPasswordConfirm: false,
       loading: false
     };
   },
