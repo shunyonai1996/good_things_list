@@ -43,8 +43,8 @@ export default {
     },
     submit() {
       console.log(this.email this.password);
-    }
-  }
+    },
+  },
 };
 </script>
 
