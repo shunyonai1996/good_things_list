@@ -18,31 +18,30 @@
 </template>
 
 <script lang="ts">
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 export default {
   name: "LoginView",
   data(){
     return {
-    showPassword: false,
-    email: '',
-    password: '',
+    showPassword: false as boolean,
+    email: '' as string,
+    password: '' as string,
   }},
   methods: {
     async login() {
       try {
-        const { email, password } = this;
-        await firebase.auth().signInWithEmailAndPassword(email, password);
+        await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
         // ログイン成功時の処理
         console.log('ログイン成功');
-      } catch (error) {
+      } catch (error: any) {
         // エラー処理
         console.error('ログインエラー:', error.message);
       }
     },
     submit() {
-      console.log(this.email this.password);
+      console.log(this.email, this.password);
     },
   },
 };
