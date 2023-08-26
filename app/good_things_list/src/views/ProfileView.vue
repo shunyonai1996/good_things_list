@@ -2,7 +2,7 @@
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
       <v-card-title>
-        <h1>プロフィール</h1>
+        <h1>Profile</h1>
       </v-card-title>
 
       <v-card-text>
