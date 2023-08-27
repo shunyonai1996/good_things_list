@@ -24,4 +24,4 @@ pnpm-debug.log*
 
 
 # FirebaseAPIkey
-./app/good_things_list/src/plugins/firebaseConfig.ts
+firebaseConfig.ts
