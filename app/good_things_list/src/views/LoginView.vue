@@ -34,7 +34,7 @@ export default {
   methods: {
     async login() {
       try {
-        await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
+        await firebase.auth().signInWithEmailAndPassword((this as any).email, (this as any).password);
         // ログイン成功時の処理
         console.log('ログイン成功');
       } catch (error: any) {
@@ -43,7 +43,7 @@ export default {
       }
     },
     submit() {
-      console.log(this.email, this.password);
+      // console.log(this.email, this.password);
     },
   },
 };

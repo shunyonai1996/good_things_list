@@ -37,16 +37,16 @@ const auth = getAuth(firebaseApp)
 export default {
   name: 'AddView',
   data: () => ({
-    email: '',
-    password: '', 
-    passwordConfirm: '',
-    showPassword: false,
-    showPasswordConfirm: false,
+    email: '' as string,
+    password: '' as string, 
+    passwordConfirm: '' as string,
+    showPassword: false as boolean,
+    showPasswordConfirm: false as boolean,
     emailErrors: [],
     passwordErrors: [], 
-    success: false,
-    error: false,
-    loading: false,
+    success: false as boolean,
+    error: false as boolean,
+    loading: false as boolean,
   }),
   methods: {
     // validation
@@ -59,37 +59,37 @@ export default {
       return true;
     },
     password_match: function () {
-      if (this.password === this.passwordConfirm) {
+      if ((this as any).password === (this as any).passwordConfirm) {
         return true;
       } else {
         return "パスワードが一致していません";
       }
     },
     createUser: function () {
-      this.loading = true;
-      if (this.$refs.test_form.validate() && this.password == this.passwordConfirm) {
+      (this as any).loading = true;
+      if ((this as any).$refs.test_form.validate() && (this as any).password == (this as any).passwordConfirm) {
         // すべてのバリデーションが通過したときのみ
         // if文の中に入る
-        createUserWithEmailAndPassword(auth, this.email, this.password)
+        createUserWithEmailAndPassword(auth, (this as any).email, (this as any).password)
         .then((userCredential) => {
-          const user = userCredential.user
-          console.log(userCredential)
-          console.log('create user success.' + user)
-          this.success = true;
-          this.loading = false;
+          const user = userCredential.user;
+          console.log(userCredential);
+          console.log('create user success.' + user.email);
+          (this as any).success = true;
+          (this as any).loading = false;
         })
         .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
-          console.log('errorCode: ' + errorCode)
-          console.log('errorMessage: ' + errorMessage)
-          errorCode == 'auth/invalid-email' ? alert('メールアドレスが不正です') : 
-          this.loading = false;
-          this.error = true;
+          console.log('errorCode: ' + errorCode);
+          console.log('errorMessage: ' + errorMessage);
+          if(errorCode == 'auth/invalid-email') alert('メールアドレスが不正です');
+          (this as any).loading = false;
+          (this as any).error = true;
         })
       } else {
-        this.error = true;
-        this.loading = false;
+        (this as any).error = true;
+        (this as any).loading = false;
       }
     }
   }
