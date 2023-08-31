@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+          :src="require('../assets/Goody.jpg')"
           class="my-3"
           contain
           height="200"
@@ -12,12 +12,12 @@
       
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          Today's goody
         </h1>
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
+          1日の終わりにGoodな出来事を振り返ると、精神に良い影響を与えることが研究でわかっています。
+          <br>さぁ、あなたの最高の1日を振り返りましょう。
           <a
             href="https://community.vuetifyjs.com"
             target="_blank"
