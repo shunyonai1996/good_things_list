@@ -1,7 +1,7 @@
 <template>
   <header>
     <v-app-bar
-      color="#F57C00"
+      color="#205295"
     >
       <v-img
         :src="require('../assets/PosiMomentsLogo.jpg')"
@@ -11,17 +11,16 @@
         contain
       ></v-img>
 
-      <!-- メニューバーアイコン -->
+      <v-spacer></v-spacer>
+
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
     </v-app-bar>
 
-      <!-- ハンバーガーメニュー -->
     <v-navigation-drawer v-model="drawer" fixed >
       <v-list
         nav
         dense
       >
-        <!-- ハンバーガーメニュー内のリンク -->
         <v-list-item-group>
           <v-list>
             <v-list-item to="/" @click="drawer = false">
