@@ -9,8 +9,12 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'FooterComponent',
-  // props: {
-  //   msg2: String,
-  // },
 });
 </script>
+
+
+<style>
+.footer {
+  text-align: center;
+}
+</style>
